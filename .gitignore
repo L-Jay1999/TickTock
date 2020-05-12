@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 /gradle/*
-build.gradle
+/build.gradle
