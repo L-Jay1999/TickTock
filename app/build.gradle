@@ -14,6 +14,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -32,9 +37,9 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
 
     // 网络
-//    implementation 'com.google.code.gson:gson:2.8.6'
-//    implementation "com.squareup.retrofit2:retrofit:2.8.1"
-//    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation "com.squareup.retrofit2:retrofit:2.8.1"
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
     // room 数据库
 //    implementation "android.arch.persistence.room:runtime:1.1.1"
