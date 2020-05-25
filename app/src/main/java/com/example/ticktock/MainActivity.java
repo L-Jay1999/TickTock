@@ -1,13 +1,16 @@
 package com.example.ticktock;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import com.example.ticktock.network.ApiService;
 import com.example.ticktock.network.VideoResponse;
+import com.example.ticktock.view.VideoInfoListAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -18,12 +21,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+//    private List<VideoResponse> videoInfoList;
+    private ViewPager2 viewPager2;
+    private VideoInfoListAdapter videoInfoListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+//        videoInfoList = new ArrayList<>();
 
+        viewPager2 = findViewById(R.id.viewpager);
+        viewPager2.setOrientation(ViewPager2.ORIENTATION_VERTICAL);
+        videoInfoListAdapter = new VideoInfoListAdapter();
+        viewPager2.setAdapter(videoInfoListAdapter);
         getData();
+//        viewPager2.setAdapter(videoInfoListAdapter);
+
     }
 
     public void getData() {
@@ -37,8 +52,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<VideoResponse>> call, Response<List<VideoResponse>> response) {
                 if(response.body() != null) {
-                    List<VideoResponse> videoInfoList = response.body();
-                    Log.d("retrofit", videoInfoList.toString());
+                    videoInfoListAdapter.setData(response.body());
+                    videoInfoListAdapter.notifyDataSetChanged();
+                    for(int i=0;i<response.body().size();i++){
+                        Log.d("retrofit", response.body().get(i).toString());
+                    }
+//                    Log.d("retrofit", response.toString());
                 }
             }
 
