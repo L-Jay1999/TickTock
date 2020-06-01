@@ -5,6 +5,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.VideoView;
 
 import com.example.ticktock.network.ApiService;
 import com.example.ticktock.network.VideoResponse;
@@ -24,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 //    private List<VideoResponse> videoInfoList;
     private ViewPager2 viewPager2;
     private VideoInfoListAdapter videoInfoListAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.setAdapter(videoInfoListAdapter);
         getData();
 //        viewPager2.setAdapter(videoInfoListAdapter);
-
     }
 
     public void getData() {

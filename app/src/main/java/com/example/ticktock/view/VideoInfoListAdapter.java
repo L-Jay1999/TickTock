@@ -40,4 +40,18 @@ public class VideoInfoListAdapter extends RecyclerView.Adapter<VideoInfoHolder> 
     public int getItemCount() {
         return videoInfoList == null ? 0 : videoInfoList.size();
     }
+
+//  到
+    public void onViewAttachedToWindow(@NonNull VideoInfoHolder holder) {
+        super.onViewAttachedToWindow(holder);
+//        Log.d("holderin", holder.toString());
+        holder.init();
+    }
+//  离开
+    public void onViewDetachedFromWindow(@NonNull VideoInfoHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+//        Log.d("holderout", holder.toString());
+        holder.init();
+    }
+
 }
