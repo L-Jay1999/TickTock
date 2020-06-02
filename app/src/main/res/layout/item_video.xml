@@ -19,11 +19,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="false"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"/>
 
 
     <TextView
         android:id="@+id/id"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ticktockImage"
@@ -60,6 +65,7 @@
 
     <TextView
         android:id="@+id/likes"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@id/videoView"
@@ -70,6 +76,7 @@
 
     <TextView
         android:id="@+id/description"
+        android:textStyle="bold"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/videoView"
@@ -80,6 +87,7 @@
 
     <TextView
         android:id="@+id/nickname"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/description"
