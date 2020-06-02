@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.Log;
@@ -55,10 +56,9 @@ public class VideoInfoHolder extends RecyclerView.ViewHolder{
 
         videoView.pause();
         playButton.setImageResource(R.drawable.ic_media_play);
-
         avatar.setVisibility(View.VISIBLE);
         videoView.setVisibility(View.INVISIBLE);
-
+        setTextBlackColors();
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -67,6 +67,7 @@ public class VideoInfoHolder extends RecyclerView.ViewHolder{
         nickname.setText("@" + videoInfo.nickname);
         description.setText(videoInfo.description);
         likes.setText(String.valueOf(videoInfo.likecount));
+        setTextBlackColors();
 
 //        URI uri = URI.create(videoInfo.avatar);
 //        Glide.with(context).clear(avatar);
@@ -93,6 +94,7 @@ public class VideoInfoHolder extends RecyclerView.ViewHolder{
                     videoView.setVisibility(View.VISIBLE);
                     playButton.setImageResource(R.drawable.ic_media_pause);
                     videoView.start();
+                    setTextBlackColors();
                 }
                 playButton.setVisibility(View.VISIBLE);
                 playButton.removeCallbacks(hide);
@@ -162,5 +164,19 @@ public class VideoInfoHolder extends RecyclerView.ViewHolder{
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(scaleXAnimator, scaleYAnimator);
         animatorSet.start();
+    }
+
+    public void setTextWhiteColors() {
+        user_id.setTextColor(Color.parseColor("#FFFFF0"));
+        nickname.setTextColor(Color.parseColor("#FFFFF0"));
+        description.setTextColor(Color.parseColor("#FFFFF0"));
+        likes.setTextColor(Color.parseColor("#FFFFF0"));
+    }
+
+    public void setTextBlackColors() {
+        user_id.setTextColor(Color.parseColor("#000000"));
+        nickname.setTextColor(Color.parseColor("#000000"));
+        description.setTextColor(Color.parseColor("#000000"));
+        likes.setTextColor(Color.parseColor("#000000"));
     }
 }
