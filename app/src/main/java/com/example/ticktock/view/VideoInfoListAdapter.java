@@ -18,9 +18,8 @@ import java.util.List;
 
 public class VideoInfoListAdapter extends RecyclerView.Adapter<VideoInfoHolder> {
     private List<VideoResponse> videoInfoList;
-
-    public void setData(List<VideoResponse> data) {
-        videoInfoList = data;
+    public void setData(List<VideoResponse> data) { 
+        videoInfoList = data; 
     }
 
     @NonNull

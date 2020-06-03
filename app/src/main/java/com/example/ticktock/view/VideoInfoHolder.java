@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.example.ticktock.R;
 import com.example.ticktock.network.VideoResponse;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -37,7 +39,7 @@ public class VideoInfoHolder extends RecyclerView.ViewHolder{
     private ImageView unlikeImage;
     private Context context;
     private ImageButton playButton;
-
+    private Runnable hide;
     public VideoInfoHolder(@NonNull View itemView) {
         super(itemView);
         context = itemView.getContext();
@@ -50,15 +52,22 @@ public class VideoInfoHolder extends RecyclerView.ViewHolder{
         likeImage = itemView.findViewById(R.id.likeImage);
         unlikeImage = itemView.findViewById(R.id.unlikeImage);
         playButton=itemView.findViewById(R.id.playButton);
+        hide =new Runnable(){
+            public void run(){
+                playButton.setVisibility(View.INVISIBLE);
+            }
+        };
     }
 //  复原
-    public void init() {
 
+    public void init() {
         videoView.pause();
         playButton.setImageResource(R.drawable.ic_media_play);
         avatar.setVisibility(View.VISIBLE);
         videoView.setVisibility(View.INVISIBLE);
+        playButton.setVisibility(View.VISIBLE);
         setTextBlackColors();
+        playButton.removeCallbacks(hide);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -77,11 +86,7 @@ public class VideoInfoHolder extends RecyclerView.ViewHolder{
 
 //      设置视频链接
         videoView.setVideoURI(Uri.parse(videoInfo.feedurl));
-        Runnable hide =new Runnable(){
-            public void run(){
-                playButton.setVisibility(View.INVISIBLE);
-            }
-        };
+
 //      播放 暂停
         View.OnClickListener onclickListener=new View.OnClickListener() {
             @Override
@@ -94,7 +99,7 @@ public class VideoInfoHolder extends RecyclerView.ViewHolder{
                     videoView.setVisibility(View.VISIBLE);
                     playButton.setImageResource(R.drawable.ic_media_pause);
                     videoView.start();
-                    setTextBlackColors();
+                    setTextWhiteColors();
                 }
                 playButton.setVisibility(View.VISIBLE);
                 playButton.removeCallbacks(hide);
@@ -144,26 +149,34 @@ public class VideoInfoHolder extends RecyclerView.ViewHolder{
     }
 //  星辰闪耀
     public void Heart(){
-        unlikeImage.setVisibility(View.VISIBLE);
-        likeImage.setVisibility(View.INVISIBLE);
+        if (likeImage.getVisibility()==View.VISIBLE) {
+            likes.setText(String.valueOf(Integer.valueOf(likes.getText().toString())+1));
+            unlikeImage.setVisibility(View.VISIBLE);
+            likeImage.setVisibility(View.INVISIBLE);
 
-        ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(unlikeImage,
-                "scaleX", 1.2f, 1f);
-        scaleXAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        scaleXAnimator.setInterpolator(new LinearInterpolator());
-        scaleXAnimator.setDuration(1000);
-        scaleXAnimator.setRepeatMode(ValueAnimator.REVERSE);
+            ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(unlikeImage,
+                    "scaleX", 1.2f, 1f);
+            scaleXAnimator.setRepeatCount(ValueAnimator.INFINITE);
+            scaleXAnimator.setInterpolator(new LinearInterpolator());
+            scaleXAnimator.setDuration(1000);
+            scaleXAnimator.setRepeatMode(ValueAnimator.REVERSE);
 
-        ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(unlikeImage,
-                "scaleY", 1.2f, 1f);
-        scaleYAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        scaleYAnimator.setInterpolator(new LinearInterpolator());
-        scaleYAnimator.setDuration(1000);
-        scaleYAnimator.setRepeatMode(ValueAnimator.REVERSE);
+            ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(unlikeImage,
+                    "scaleY", 1.2f, 1f);
+            scaleYAnimator.setRepeatCount(ValueAnimator.INFINITE);
+            scaleYAnimator.setInterpolator(new LinearInterpolator());
+            scaleYAnimator.setDuration(1000);
+            scaleYAnimator.setRepeatMode(ValueAnimator.REVERSE);
 
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.playTogether(scaleXAnimator, scaleYAnimator);
-        animatorSet.start();
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.playTogether(scaleXAnimator, scaleYAnimator);
+            animatorSet.start();
+        }
+        else{
+            likes.setText(String.valueOf(Integer.valueOf(likes.getText().toString())-1));
+            unlikeImage.setVisibility(View.INVISIBLE);
+            likeImage.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setTextWhiteColors() {
