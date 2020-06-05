@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.ticktock"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -51,7 +51,7 @@ dependencies {
     implementation "com.github.bumptech.glide:okhttp3-integration:4.8.0"
 
     // lottie Android 官网：https://airbnb.io/lottie/#/android
-//    implementation 'com.airbnb.android:lottie:2.7.0'
+    implementation 'com.airbnb.android:lottie:2.7.0'
 
     // 这里添加了一个外部库，用来选择颜色
     // https://github.com/Pes8/android-material-color-picker-dialog
