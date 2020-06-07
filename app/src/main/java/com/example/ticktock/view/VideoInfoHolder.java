@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -51,8 +50,8 @@ public class VideoInfoHolder extends RecyclerView.ViewHolder{
         videoView = itemView.findViewById(R.id.videoView);
         likeImage = itemView.findViewById(R.id.likeImage);
         unlikeImage = itemView.findViewById(R.id.unlikeImage);
-        playButton=itemView.findViewById(R.id.playButton);
-        hide =new Runnable(){
+        playButton = itemView.findViewById(R.id.playButton);
+        hide = new Runnable(){
             public void run(){
                 playButton.setVisibility(View.INVISIBLE);
             }
